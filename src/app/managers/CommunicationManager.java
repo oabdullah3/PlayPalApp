@@ -18,7 +18,7 @@ public class CommunicationManager {
     // --- Singleton-like access ---
     private static CommunicationManager instance;
 
-    private CommunicationManager() {}
+    protected CommunicationManager() {}
 
     public static CommunicationManager getInstance() {
         if (instance == null) {

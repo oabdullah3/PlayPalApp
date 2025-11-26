@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 public class InputValidator {
 
     // Scanner instance, shared statically to avoid resource leaks
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
     
 
     public static String readOptionalString(String prompt) {

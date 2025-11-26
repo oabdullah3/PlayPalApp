@@ -17,7 +17,7 @@ public class BookingManager {
     // --- Singleton-like access ---
     private static BookingManager instance;
 
-    private BookingManager() {}
+    protected BookingManager() {}
 
     public static BookingManager getInstance() {
         if (instance == null) {
@@ -64,11 +64,6 @@ public class BookingManager {
         
         // 3. Perform the safe cast once validation is complete
         Trainer trainer = (Trainer) trainerUser;
-
-        if (!trainer.isApproved()) {
-            throw new BookingFailedException("Trainer is not yet approved by SystemManager.");
-        }
-
 
         if (!trainer.isApproved()) {
             throw new BookingFailedException("Trainer is not yet approved by SystemManager.");

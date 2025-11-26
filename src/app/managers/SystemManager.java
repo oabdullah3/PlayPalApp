@@ -10,7 +10,7 @@ public class SystemManager {
     private static SystemManager instance;
     private final Database db;
 
-    private SystemManager() {
+    protected SystemManager() {
         this.db = Database.getInstance();
     }
 
@@ -26,8 +26,17 @@ public class SystemManager {
     
     // Mock function to approve a trainer (used by admin CLI)
     public void approveTrainer(String trainerId) {
-        // In a real app, this finds the trainer object in the DB and calls setApproved(true)
-        System.out.println("System: Trainer " + trainerId.substring(0, 4) + " approved successfully.");
+        User user = db.getAllUsers().stream()
+                .filter(u -> u.getId().startsWith(trainerId))
+                .findFirst()
+                .orElse(null);
+
+        if (user != null && user instanceof Trainer) {
+            ((Trainer) user).setApproved(true);
+            System.out.println("System: Trainer " + user.getName() + " approved successfully.");
+        } else {
+            System.out.println("System: Trainer ID not found or user is not a Trainer.");
+        }
     }
 
     // Simple status report

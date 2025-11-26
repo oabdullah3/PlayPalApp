@@ -24,6 +24,18 @@ public class Message {
         this.isRead = false;
     }
 
+    /**
+     * Constructor for testing with custom timestamp.
+     */
+    public Message(String senderId, String receiverId, String content, LocalDateTime customTimestamp) {
+        this.messageId = UUID.randomUUID().toString();
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.content = content;
+        this.timestamp = customTimestamp;
+        this.isRead = false;
+    }
+
     // --- Getters ---
 
     public String getMessageId() {

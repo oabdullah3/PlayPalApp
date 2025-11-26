@@ -16,7 +16,7 @@ public class AuthManager {
     // --- Singleton-like access (can be non-singleton, but useful for CLI) ---
     private static AuthManager instance;
 
-    private AuthManager() {}
+    protected AuthManager() {}
 
     public static AuthManager getInstance() {
         if (instance == null) {

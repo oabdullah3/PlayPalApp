@@ -23,10 +23,6 @@ public class Trainer extends User {
         // Delegates to the TrainerState implementation
         this.state.showMenu();
     }
-    
-    // --- Getters and Setters ---
-    
- // Add to Trainer.java (Concrete Class)
 
     public void setHourlyRate(double hourlyRate) {
         this.hourlyRate = hourlyRate;
@@ -48,7 +44,6 @@ public class Trainer extends User {
         return isApproved;
     }
 
-    // Used by SystemManager to verify the trainer
     public void setApproved(boolean approved) {
         isApproved = approved;
     }

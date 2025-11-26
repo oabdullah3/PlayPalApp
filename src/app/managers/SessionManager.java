@@ -4,7 +4,6 @@ import app.entities.Session;
 import app.entities.User;
 import app.exceptions.SessionFullException;
 import app.exceptions.SessionNotFoundException;
-import app.exceptions.UserNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +17,7 @@ public class SessionManager {
     // --- Singleton-like access ---
     private static SessionManager instance;
 
-    private SessionManager() {}
+    protected SessionManager() {}
 
     public static SessionManager getInstance() {
         if (instance == null) {

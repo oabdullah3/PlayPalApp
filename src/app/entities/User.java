@@ -27,8 +27,6 @@ public abstract class User {
     // Abstract method for showing unique menu options
     public abstract void showMenuOptions();
     
-
-    // --- Getters and Setters (Only necessary ones included) ---
     
     public void setName(String name) {
         this.name = name;
