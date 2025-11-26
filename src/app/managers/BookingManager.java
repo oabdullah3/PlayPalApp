@@ -6,6 +6,7 @@ import app.entities.User;
 import app.exceptions.BookingFailedException;
 import app.exceptions.InsufficientFundsException;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class BookingManager {
     public List<Booking> getAllBookingsForTrainer(String trainerId) {
         return db.getAllBookings().stream()
                  .filter(b -> b.getTrainerId().equals(trainerId))
-                 .toList();
+                 .collect(Collectors.toList());
     }
 
     public void bookTrainer(String trainerId, int hours) throws InsufficientFundsException, BookingFailedException {

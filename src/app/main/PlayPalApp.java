@@ -9,6 +9,7 @@ import app.patterns.command.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class PlayPalApp {
 
@@ -326,7 +327,7 @@ public class PlayPalApp {
                 .filter(u -> u instanceof Trainer)
                 .map(u -> (Trainer) u)
                 .filter(t -> !t.isApproved())
-                .toList();
+                .collect(Collectors.toList());
 
         if (pendingTrainers.isEmpty()) {
             System.out.println("No pending trainer requests.");
