@@ -242,13 +242,13 @@ public class PlayPalApp {
     private void handleUpdateProfileForTrainer(Trainer trainer) {
         System.out.println("\n--- Update Trainer Profile ---");
         System.out.println("Current Name: " + trainer.getName());
-        String newName = InputValidator.readString("Enter new name (or press Enter to keep current): ");
+        String newName = InputValidator.readOptionalString("Enter new name (or press Enter to keep current): ");
 
         System.out.printf("Current Rate: $%.2f/hr\n", trainer.getHourlyRate());
-        String newRateStr = InputValidator.readString("Enter new hourly rate (or press Enter to keep current): ");
+        String newRateStr = InputValidator.readOptionalString("Enter new hourly rate (or press Enter to keep current): ");
 
         System.out.println("Current Specialty: " + trainer.getSpecialty());
-        String newSpecialty = InputValidator.readString("Enter new specialty (or press Enter to keep current): ");
+        String newSpecialty = InputValidator.readOptionalString("Enter new specialty (or press Enter to keep current): ");
         
         // Logic to update the Trainer object
         if (!newName.isEmpty()) {

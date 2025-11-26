@@ -12,9 +12,7 @@ public class Message {
     private final LocalDateTime timestamp;
     private boolean isRead;
 
-    /**
-     * Constructor for creating a new Message object.
-     */
+
     public Message(String senderId, String receiverId, String content) {
         this.messageId = UUID.randomUUID().toString();
         this.senderId = senderId;
@@ -24,19 +22,6 @@ public class Message {
         this.isRead = false;
     }
 
-    /**
-     * Constructor for testing with custom timestamp.
-     */
-    public Message(String senderId, String receiverId, String content, LocalDateTime customTimestamp) {
-        this.messageId = UUID.randomUUID().toString();
-        this.senderId = senderId;
-        this.receiverId = receiverId;
-        this.content = content;
-        this.timestamp = customTimestamp;
-        this.isRead = false;
-    }
-
-    // --- Getters ---
 
     public String getMessageId() {
         return messageId;
@@ -62,7 +47,6 @@ public class Message {
         return isRead;
     }
 
-    // --- Setter ---
 
     public void setRead(boolean read) {
         isRead = read;
