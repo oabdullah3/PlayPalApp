@@ -1,6 +1,7 @@
 package app.entities;
 
 import app.utils.UserState;
+import app.exceptions.InsufficientFundsException;
 
 import java.util.UUID; // Used for unique IDs
 
@@ -9,10 +10,9 @@ public abstract class User {
     private final String id;
     private String name;
     private final String email;
-    private final String password; // Stored as plain text for simplicity
+    private final String password;
     private double balance;
     
-    // State Pattern interface reference
     protected UserState state;
 
     public User(String name, String email, String password, double initialBalance) {
@@ -21,11 +21,21 @@ public abstract class User {
         this.email = email;
         this.password = password;
         this.balance = initialBalance;
-        // The specific constructor (Player/Trainer) will set the concrete state implementation
     }
     
-    // Abstract method for showing unique menu options
     public abstract void showMenuOptions();
+    
+
+    public void pay(double amount) throws InsufficientFundsException {
+        if (this.balance < amount) {
+            throw new InsufficientFundsException("Insufficient funds: " + this.balance);
+        }
+        this.balance -= amount;
+    }
+
+    public void receivePayment(double amount) {
+        this.balance += amount;
+    }
     
     
     public void setName(String name) {
@@ -56,7 +66,6 @@ public abstract class User {
         this.balance = balance;
     }
 
-    // Example of a minimal state usage
     public void executeMenu() {
         if (state != null) {
             state.showMenu();

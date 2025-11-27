@@ -62,9 +62,8 @@ public class BookingManager {
             throw new InsufficientFundsException("Booking failed. Required: $" + totalCost + ", Available: $" + player.getBalance());
         }
 
-        player.setBalance(player.getBalance() - totalCost);
-        
-        trainer.setBalance(trainer.getBalance() + totalCost);
+        player.pay(totalCost);       // Encapsulated logic
+        trainer.receivePayment(totalCost);
 
         Booking newBooking = new Booking(player.getId(), trainer.getId(), totalCost);
         db.addBooking(newBooking);
