@@ -41,12 +41,7 @@ public class AuthManager {
             throw new DuplicateEmailException("Email already in use: " + email);
         }
 
-        User newUser;
-        if (isTrainer) {
-            newUser = new Trainer(name, email, password, specialty, rate);
-        } else {
-            newUser = new Player(name, email, password);
-        }
+        User newUser = User.create(name, email, password, isTrainer, specialty, rate);
 
         db.addUser(newUser);
         System.out.println("Registration successful. Account created as " + (isTrainer ? "Trainer (Pending Approval)" : "Player") + ".");

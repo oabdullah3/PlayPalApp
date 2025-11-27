@@ -32,6 +32,14 @@ public abstract class User {
         }
         this.balance -= amount;
     }
+    
+    public static User create(String name, String email, String password, boolean isTrainer, String specialty, double rate) {
+        if (isTrainer) {
+            return new Trainer(name, email, password, specialty, rate);
+        } else {
+            return new Player(name, email, password);
+        }
+    }
 
     public void receivePayment(double amount) {
         this.balance += amount;
