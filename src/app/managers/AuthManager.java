@@ -59,4 +59,10 @@ public class AuthManager {
     public User getUserById(String userId) {
     	return db.findUserByIdPrefix(userId);
     }
+    
+    private static final String ADMIN_EMAIL = "admin@playpal.com";
+
+    public boolean isAdmin(User user) {
+        return user != null && user.getEmail().equalsIgnoreCase(ADMIN_EMAIL);
+    }
 }

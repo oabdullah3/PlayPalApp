@@ -102,10 +102,10 @@ public class PlayPalApp {
     
     private void runDashboard(User user) {
         // Check for system manager role (Admin Logic is handled implicitly by ID for simplicity)
-        if (user.getEmail().equals("admin@playpal.com")) {
-             runAdminDashboard();
-             return;
-        }
+    	if (authManager.isAdmin(user)) {
+            runAdminDashboard();
+            return;
+       }
         
         // Use the State Pattern to display the appropriate menu based on User type
         while (authManager.getCurrentUser() != null) {
