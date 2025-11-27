@@ -234,8 +234,7 @@ public class PlayPalApp {
             User player = authManager.getUserById(b.getPlayerId());
             String playerName = player != null ? player.getName() : "Unknown Player";
 
-            System.out.printf("%d. [Booking ID: %s] Player: %s | Amount: $%.2f\n",
-                i + 1, b.getBookingId().substring(0, 4), playerName, b.getAmount());
+            System.out.println((i + 1) + ". " + b.toDisplayString(playerName));
         }
     }
     

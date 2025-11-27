@@ -16,6 +16,13 @@ public class Booking {
         this.trainerId = trainerId;
         this.amount = amount;
     }
+    
+    public String toDisplayString(String playerName) {
+        return String.format("[Booking ID: %s] Player: %s | Amount: $%.2f",
+            bookingId.substring(0, 4), 
+            playerName, 
+            amount);
+    }
 
     public String getBookingId() {
         return bookingId;
