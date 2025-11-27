@@ -3,6 +3,7 @@ package app.managers;
 import app.entities.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Database {
 
@@ -31,6 +32,82 @@ public class Database {
         mockTrainer.setApproved(true);
         allUsers.add(mockTrainer);
     }
+    
+	 // app.managers.Database.java
+	
+	 // NEW Helper Method
+	 public User findUserByEmail(String email) {
+	     return allUsers.stream()
+	             .filter(u -> u.getEmail().equalsIgnoreCase(email))
+	             .findFirst()
+	             .orElse(null);
+	 }
+	
+	 // NEW Helper Method
+	 public User findUserByIdPrefix(String prefix) {
+	     return allUsers.stream()
+	             .filter(u -> u.getId().startsWith(prefix))
+	             .findFirst()
+	             .orElse(null);
+	 }
+	
+	 // NEW Helper Method
+	 public boolean emailExists(String email) {
+	     return allUsers.stream()
+	             .anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
+	 }
+ 
+
+	//REFACTOR: Encapsulate Write Operations
+	public void addUser(User user) {
+	  allUsers.add(user);
+	}
+	
+	public void addSession(Session session) {
+	  allSessions.add(session);
+	}
+	
+	public void addBooking(Booking booking) {
+	  allBookings.add(booking);
+	}
+	
+	public void addMessage(Message message) {
+	  allMessages.add(message);
+	}
+	
+	public List<Trainer> findApprovedTrainersBySpecialty(String specialty) {
+	    return allUsers.stream()
+	            .filter(u -> u instanceof Trainer)
+	            .map(u -> (Trainer) u)
+	            .filter(t -> t.isApproved() && t.getSpecialty().equalsIgnoreCase(specialty))
+	            .collect(Collectors.toList());
+	}
+
+	public List<Booking> findBookingsByTrainerId(String trainerId) {
+	    return allBookings.stream()
+	            .filter(b -> b.getTrainerId().equals(trainerId))
+	            .collect(Collectors.toList());
+	}
+	
+	public List<Session> findAvailableSessionsBySport(String sport) {
+	    return allSessions.stream()
+	            .filter(s -> s.getSport().equalsIgnoreCase(sport) && !s.isFull())
+	            .collect(Collectors.toList());
+	}
+
+	public Session findSessionByIdPrefix(String prefix) {
+	    return allSessions.stream()
+	            .filter(s -> s.getSessionId().startsWith(prefix))
+	            .findFirst()
+	            .orElse(null);
+	}
+	
+	public List<Message> findMessagesForUser(String userId) {
+	    return allMessages.stream()
+	            .filter(m -> m.getReceiverId().equals(userId))
+	            .sorted((m1, m2) -> m2.getTimestamp().compareTo(m1.getTimestamp()))
+	            .collect(Collectors.toList());
+	}
 
 
     public List<User> getAllUsers() {

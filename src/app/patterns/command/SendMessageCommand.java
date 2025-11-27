@@ -15,7 +15,7 @@ public class SendMessageCommand implements Command {
     @Override
     public void execute() {
         // Logic to store the message in the central database
-        db.getAllMessages().add(this.message);
+    	db.addMessage(this.message);
         System.out.println("Message command executed: Message from " 
                            + message.getSenderId().substring(0, 4) + " saved.");
     }

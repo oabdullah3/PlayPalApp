@@ -57,10 +57,7 @@ public class CommunicationManager {
             return List.of();
         }
         
-        return db.getAllMessages().stream()
-                .filter(m -> m.getReceiverId().equals(user.getId()))
-                .sorted((m1, m2) -> m2.getTimestamp().compareTo(m1.getTimestamp()))
-                .collect(Collectors.toList());
+        return db.findMessagesForUser(user.getId());
     }
     
     // --- Helper Methods to send system notifications ---

@@ -26,10 +26,7 @@ public class SystemManager {
     
     // Mock function to approve a trainer (used by admin CLI)
     public void approveTrainer(String trainerId) {
-        User user = db.getAllUsers().stream()
-                .filter(u -> u.getId().startsWith(trainerId))
-                .findFirst()
-                .orElse(null);
+    	User user = db.findUserByIdPrefix(trainerId);
 
         if (user != null && user instanceof Trainer) {
             ((Trainer) user).setApproved(true);

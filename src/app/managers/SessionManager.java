@@ -37,14 +37,12 @@ public class SessionManager {
         }
 
         Session newSession = new Session(creator.getId(), sport, location, time, maxParticipants);
-        db.getAllSessions().add(newSession);
+        db.addSession(newSession);
         System.out.println("Session created successfully: " + newSession.getSessionId().substring(0, 4));
     }
 
     public List<Session> searchAvailableSessions(String searchSport) {
-        return db.getAllSessions().stream()
-                .filter(s -> s.getSport().equalsIgnoreCase(searchSport) && !s.isFull())
-                .collect(Collectors.toList());
+    	return db.findAvailableSessionsBySport(searchSport);
     }
 
     public void joinSession(String sessionId) throws SessionNotFoundException, SessionFullException {
@@ -54,10 +52,11 @@ public class SessionManager {
             return;
         }
 
-        Session session = db.getAllSessions().stream()
-                .filter(s -> s.getSessionId().startsWith(sessionId)) // Simple prefix match for CLI ease
-                .findFirst()
-                .orElseThrow(() -> new SessionNotFoundException("Session not found with ID: " + sessionId));
+        Session session = db.findSessionByIdPrefix(sessionId);
+        
+        if (session == null) {
+            throw new SessionNotFoundException("Session not found with ID: " + sessionId);
+        }
 
         if (session.isFull()) {
             throw new SessionFullException("Session is full. Max participants reached.");
@@ -77,9 +76,6 @@ public class SessionManager {
     }
 
     public Session getSessionById(String sessionId) {
-        return db.getAllSessions().stream()
-                .filter(s -> s.getSessionId().startsWith(sessionId))
-                .findFirst()
-                .orElse(null);
+    	return db.findSessionByIdPrefix(sessionId);
     }
 }
