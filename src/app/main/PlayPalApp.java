@@ -303,7 +303,7 @@ public class PlayPalApp {
     private void runAdminDashboard() {
         while (authManager.getCurrentUser() != null) {
             System.out.println("\n--- ADMIN DASHBOARD ---");
-            systemManager.displaySystemStatus();
+            System.out.println(systemManager.displaySystemStatus());
             System.out.println("1. Approve Trainer Requests");
             System.out.println("2. Logout");
             

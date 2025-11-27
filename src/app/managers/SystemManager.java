@@ -35,12 +35,13 @@ public class SystemManager {
             System.out.println("System: Trainer ID not found or user is not a Trainer.");
         }
     }
-
-    // Simple status report
-    public void displaySystemStatus() {
-        System.out.println("\n--- System Status Report ---");
-        System.out.println("Total Users: " + db.getAllUsers().size());
-        System.out.println("Total Sessions: " + db.getAllSessions().size());
-        System.out.println("--------------------------");
+    
+    public String displaySystemStatus() {
+        StringBuilder report = new StringBuilder();
+        report.append("\n--- System Status Report ---\n");
+        report.append("Total Users: ").append(db.getAllUsers().size()).append("\n");
+        report.append("Total Sessions: ").append(db.getAllSessions().size()).append("\n");
+        report.append("--------------------------");
+        return report.toString();
     }
 }
