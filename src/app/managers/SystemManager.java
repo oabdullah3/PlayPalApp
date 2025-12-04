@@ -2,11 +2,12 @@ package app.managers;
 
 import app.entities.User;
 import app.entities.Trainer;
+import java.util.List;
 
 // The SystemManager class must also be a Singleton for centralized control.
 public class SystemManager {
 
-    // --- Singleton Implementation ---
+    
     private static SystemManager instance;
     private final Database db;
 
@@ -20,11 +21,7 @@ public class SystemManager {
         }
         return instance;
     }
-    // --------------------------------
-
-    // --- Admin Functions (Skeleton) ---
     
-    // Mock function to approve a trainer (used by admin CLI)
     public void approveTrainer(String trainerId) {
     	User user = db.findUserByIdPrefix(trainerId);
 
@@ -34,6 +31,10 @@ public class SystemManager {
         } else {
             System.out.println("System: Trainer ID not found or user is not a Trainer.");
         }
+    }
+    
+    public List<Trainer> getPendingTrainers() {
+        return db.findPendingTrainers();
     }
     
     public String displaySystemStatus() {

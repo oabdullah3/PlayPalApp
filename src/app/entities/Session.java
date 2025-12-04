@@ -8,7 +8,7 @@ import java.util.UUID;
 public class Session {
     
     private final String sessionId;
-    private final String creatorId; // ID of the Player who created it
+    private final String creatorId;
     private final String sport;
     private final String location;
     private final LocalDateTime time;
@@ -23,7 +23,6 @@ public class Session {
         this.time = time;
         this.maxParticipants = maxParticipants;
         this.participantIds = new ArrayList<>();
-        // Creator is automatically the first participant
         this.participantIds.add(creatorId);
     }
     
@@ -31,7 +30,6 @@ public class Session {
         return participantIds.size() >= maxParticipants;
     }
 
-    // --- Getters and Adders ---
 
     public String getCreatorId() {
         return creatorId;
@@ -57,7 +55,6 @@ public class Session {
         this.participantIds.add(userId);
     }
     
-    // For console display
     @Override
     public String toString() {
         return String.format("[%s] %s at %s (%s) - Players: %d/%d", 

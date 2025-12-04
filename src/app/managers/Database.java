@@ -25,7 +25,7 @@ public class Database {
     private final List<Booking> allBookings = new ArrayList<>();
     private final List<Message> allMessages = new ArrayList<>();
 
-    // Mock initial data for testing purposes
+    
     private void initializeMockData() {
         allUsers.add(new Player("Admin User", "admin@playpal.com", "admin123")); 
         Trainer mockTrainer = new Trainer("Sarah Connor", "sarah@pal.com", "pword", "Yoga", 30.00);
@@ -33,9 +33,16 @@ public class Database {
         allUsers.add(mockTrainer);
     }
     
-	 // app.managers.Database.java
+ 
+    public List<Trainer> findPendingTrainers() {
+        return allUsers.stream()
+                .filter(u -> u instanceof Trainer)
+                .map(u -> (Trainer) u)
+                .filter(t -> !t.isApproved())
+                .collect(Collectors.toList());
+    }
+    
 	
-	 // NEW Helper Method
 	 public User findUserByEmail(String email) {
 	     return allUsers.stream()
 	             .filter(u -> u.getEmail().equalsIgnoreCase(email))
@@ -43,7 +50,6 @@ public class Database {
 	             .orElse(null);
 	 }
 	
-	 // NEW Helper Method
 	 public User findUserByIdPrefix(String prefix) {
 	     return allUsers.stream()
 	             .filter(u -> u.getId().startsWith(prefix))
@@ -51,14 +57,13 @@ public class Database {
 	             .orElse(null);
 	 }
 	
-	 // NEW Helper Method
+	 
 	 public boolean emailExists(String email) {
 	     return allUsers.stream()
 	             .anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
 	 }
  
 
-	//REFACTOR: Encapsulate Write Operations
 	public void addUser(User user) {
 	  allUsers.add(user);
 	}

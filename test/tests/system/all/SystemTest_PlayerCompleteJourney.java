@@ -52,7 +52,7 @@ class SystemTest_PlayerCompleteJourney {
             // 2. Login
             "1\np@p.com\npw\n" +
             // 3. Create Session
-            "1\nYoga\nPark\n2025-12-01 10:00\n5\n" +
+            "1\nYoga\nPark\n2026-12-01 10:00\n5\n" +
             // 4. Search & Book Trainer (2 hours = $40)
             "3\nYoga\n" + tId + "\n2\n" +
             // 5. Logout
