@@ -1,19 +1,16 @@
 package app.main;
 
 import app.entities.*;
-import app.exceptions.*;
 import app.managers.*;
 import app.utils.*;
-import app.patterns.command.*;
 import app.ui.AdminUI;
 import app.ui.AuthUI;
 import app.ui.PlayerUI;
 import app.ui.TrainerUI;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class PlayPalApp {
 
@@ -26,6 +23,7 @@ public class PlayPalApp {
     private final AdminUI adminUI = new AdminUI();
 
     public static void main(String[] args) {
+    	Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
         System.out.println("--- Welcome to PlayPal CLI ---");
         PlayPalApp app = new PlayPalApp();
         app.runMainMenu();

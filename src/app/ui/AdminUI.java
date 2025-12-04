@@ -36,12 +36,7 @@ public class AdminUI {
     }
     
     private void handleTrainerApproval() {
-        List<Trainer> pendingTrainers = Database.getInstance().getAllUsers().stream()
-                .filter(u -> u instanceof Trainer)
-                .map(u -> (Trainer) u)
-                .filter(t -> !t.isApproved())
-                .collect(Collectors.toList());
-
+        List<Trainer> pendingTrainers = Database.getInstance().findPendingTrainers();
         if (pendingTrainers.isEmpty()) {
             System.out.println("No pending trainer requests.");
             return;
