@@ -1,6 +1,7 @@
 package app.entities;
 
-import app.utils.TrainerState;
+import app.ui.PlayerUI;
+import app.ui.TrainerUI;
 
 public class Trainer extends User {
     
@@ -12,15 +13,20 @@ public class Trainer extends User {
         super(name, email, password, 0.00); 
         this.specialty = specialty;
         this.hourlyRate = hourlyRate;
-        this.state = new TrainerState(this);
     }
 
     @Override
     public void showMenuOptions() {
         System.out.println("\n--- Trainer Dashboard ---");
-        this.state.showMenu();
+        String verificationStatus = isApproved() ? "APPROVED" : "PENDING";
+        System.out.printf("Welcome, Trainer %s! Status: %s. Earnings: $%.2f\n", 
+            getName(), verificationStatus, getBalance());
+        System.out.println("1. View Current Bookings");
+        System.out.println("2. Update Profile/Rate ($" + getHourlyRate() + "/hr)");
+        System.out.println("3. View Messages");
+        System.out.println("4. Logout");
     }
-
+    
     public void setHourlyRate(double hourlyRate) {
         this.hourlyRate = hourlyRate;
     }

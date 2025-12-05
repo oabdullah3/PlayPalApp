@@ -1,19 +1,20 @@
 package app.patterns.command;
 
+import app.entities.Notification;
+import app.managers.Database;
+
 public class NotificationCommand implements Command {
 
-    private final String userId;
-    private final String notificationContent;
+	private final Notification notification;
+    private final Database db = Database.getInstance();
 
-    public NotificationCommand(String userId, String notificationContent) {
-        this.userId = userId;
-        this.notificationContent = notificationContent;
+    public NotificationCommand(Notification notification) {
+        this.notification = notification;
     }
 
     @Override
     public void execute() {
-        // In a CLI, this executes by printing the alert directly to the console.
-        System.out.println("\n[ALERT to " + userId.substring(0, 4) + "]: " 
-                           + notificationContent);
-    }
+        db.addMessage(this.notification);
+        System.out.println("Message command executed: Message from " 
+                + "[SYSTEM]" + " saved."); }
 }

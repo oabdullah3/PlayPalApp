@@ -9,19 +9,19 @@ import app.managers.AuthManager;
 import app.managers.BookingManager;
 import app.utils.InputValidator;
 
-public class TrainerUI {
+public class TrainerUI implements UserUI {
 	
 	private final AuthManager authManager = AuthManager.getInstance();
     private final BookingManager bookingManager = BookingManager.getInstance();
     private final SharedUI sharedUI = new SharedUI();
 	
-    public void handleTrainerChoice(int choice, Trainer trainer) {
+    public void run(int choice) {
         switch (choice) {
             case 1: 
-            	handleViewBookingsForTrainer(trainer);
+            	handleViewBookingsForTrainer();
                 break;
             case 2: 
-            	handleUpdateProfileForTrainer(trainer);
+            	handleUpdateProfileForTrainer();
                 break;
             case 3: 
                 sharedUI.handleViewMessages();
@@ -35,7 +35,8 @@ public class TrainerUI {
     }
     
 
-    private void handleViewBookingsForTrainer(Trainer trainer) {
+    private void handleViewBookingsForTrainer() {
+    	Trainer trainer = (Trainer) authManager.getCurrentUser();
         List<Booking> trainerBookings = bookingManager.getAllBookingsForTrainer(trainer.getId());
 
         if (trainerBookings.isEmpty()) {
@@ -55,7 +56,8 @@ public class TrainerUI {
     }
     
 
-    private void handleUpdateProfileForTrainer(Trainer trainer) {
+    private void handleUpdateProfileForTrainer() {
+    	Trainer trainer = (Trainer) authManager.getCurrentUser();
         System.out.println("\n--- Update Trainer Profile ---");
         System.out.println("Current Name: " + trainer.getName());
         String newName = InputValidator.readOptionalString("Enter new name (or press Enter to keep current): ");

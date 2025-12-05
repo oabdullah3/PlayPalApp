@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Booking {
     
-    private final String bookingId;
+    private String bookingId;
     private final String playerId;
     private final String trainerId;
     private final double amount;
@@ -21,6 +21,10 @@ public class Booking {
             bookingId.substring(0, 4), 
             playerName, 
             amount);
+    }
+    
+    public void setId(String id) {
+        this.bookingId = id;
     }
 
     public String getBookingId() {

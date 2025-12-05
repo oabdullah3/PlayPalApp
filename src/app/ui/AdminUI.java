@@ -49,12 +49,7 @@ public class AdminUI {
 
         if (!trainerIdPrefix.equals("0")) {
             Trainer trainer = (Trainer) authManager.getUserById(trainerIdPrefix);
-            if (trainer != null && trainer instanceof Trainer) {
-                trainer.setApproved(true);
-                System.out.println("Trainer " + trainer.getName() + " has been approved!");
-            } else {
-                System.out.println("Invalid ID or user is not a Trainer.");
-            }
+            systemManager.approveTrainer(trainer.getId());
         }
     }
 }

@@ -7,19 +7,15 @@ import java.time.format.DateTimeParseException;
 
 public class InputValidator {
 
-    // Scanner instance, shared statically to avoid resource leaks
     private static Scanner scanner = new Scanner(System.in);
     
 
     public static String readOptionalString(String prompt) {
         System.out.print(prompt);
-        // Reads the line and returns it, even if it's empty (trimmed)
         return scanner.nextLine().trim(); 
     }
     
-    /**
-     * Reads a non-empty String input from the console.
-     */
+    
     public static String readString(String prompt) {
         String input;
         do {
@@ -32,9 +28,6 @@ public class InputValidator {
         return input;
     }
 
-    /**
-     * Reads an integer input, ensuring the user enters a valid number.
-     */
     public static int readInt(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -48,9 +41,6 @@ public class InputValidator {
         }
     }
 
-    /**
-     * Reads a double input, ensuring the user enters a valid decimal number.
-     */
     public static double readDouble(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -63,9 +53,7 @@ public class InputValidator {
         }
     }
 
-    /**
-     * Reads a LocalDateTime object in the required format (YYYY-MM-DD HH:MM).
-     */
+   
     public static LocalDateTime readDateTime(String prompt) {
         String pattern = "yyyy-MM-dd HH:mm";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);

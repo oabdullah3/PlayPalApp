@@ -7,9 +7,12 @@ import app.ui.AdminUI;
 import app.ui.AuthUI;
 import app.ui.PlayerUI;
 import app.ui.TrainerUI;
+import app.ui.UserUI;
 
 
 import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 public class PlayPalApp {
@@ -21,6 +24,13 @@ public class PlayPalApp {
     private final PlayerUI playerUI = new PlayerUI();
     private final TrainerUI trainerUI = new TrainerUI();
     private final AdminUI adminUI = new AdminUI();
+    
+    private final Map<Class<? extends User>, UserUI> uiDispatcher = new HashMap<>();
+    
+    public PlayPalApp() {
+		uiDispatcher.put(Player.class, playerUI);
+		uiDispatcher.put(Trainer.class, trainerUI);
+	}
 
     public static void main(String[] args) {
     	Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
@@ -68,18 +78,18 @@ public class PlayPalApp {
     	if (authManager.isAdmin(user)) {
     		adminUI.runAdminDashboard();
             return;
-       }
-        
-        while (authManager.getCurrentUser() != null) {
-            user.showMenuOptions();
-            int choice = InputValidator.readInt("Enter choice: ");
-            
-            if (user instanceof Player) {
-                playerUI.handlePlayerChoice(choice, (Player) user);
-            } else if (user instanceof Trainer) {
-            	trainerUI.handleTrainerChoice(choice, (Trainer) user);
-            }
-        }
+    	}
+    	while (authManager.getCurrentUser() != null) {
+		    user.showMenuOptions();
+		    int choice = InputValidator.readInt("Enter choice: ");
+		    UserUI ui = uiDispatcher.get(user.getClass());
+	
+	        if (ui != null) {
+	            ui.run(choice);
+	        } else {
+	            System.out.println("Error: No UI dashboard found for this user type.");
+	        }
+    	}
     }
     
 }

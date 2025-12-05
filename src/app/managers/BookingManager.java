@@ -62,14 +62,17 @@ public class BookingManager {
             throw new InsufficientFundsException("Booking failed. Required: $" + totalCost + ", Available: $" + player.getBalance());
         }
 
-        player.pay(totalCost);       // Encapsulated logic
+        player.pay(totalCost);
         trainer.receivePayment(totalCost);
+        
+        db.addUser(player);
+        db.addUser(trainer);
 
         Booking newBooking = new Booking(player.getId(), trainer.getId(), totalCost);
         db.addBooking(newBooking);
-
-        System.out.printf("Booking successful! Paid $%.2f. Your new balance is $%.2f.\n", totalCost, player.getBalance());
         
-        CommunicationManager.getInstance().sendBookingNotification(player.getId(), trainer.getId(), totalCost);
+        String notificationMessage = String.format("Booking successful! Paid $%.2f. Your new balance is $%.2f.\n", totalCost, player.getBalance());
+        System.out.print(notificationMessage);
+        CommunicationManager.getInstance().sendNotification(player.getId(), notificationMessage);
     }
 }

@@ -27,6 +27,9 @@ public class SystemManager {
 
         if (user != null && user instanceof Trainer) {
             ((Trainer) user).setApproved(true);
+            db.updateTrainerApproval(user.getId(), true);
+            String notificationContent = "Your trainer application has been approved. You can now offer your services.";
+            CommunicationManager.getInstance().sendNotification(user.getId(), notificationContent);
             System.out.println("System: Trainer " + user.getName() + " approved successfully.");
         } else {
             System.out.println("System: Trainer ID not found or user is not a Trainer.");

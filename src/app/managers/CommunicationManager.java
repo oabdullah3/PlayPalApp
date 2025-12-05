@@ -1,7 +1,9 @@
 package app.managers;
 
 import app.entities.Message;
+import app.entities.Notification;
 import app.entities.User;
+import app.entities.UserMessage;
 import app.patterns.command.Command;
 import app.patterns.command.NotificationCommand;
 import app.patterns.command.SendMessageCommand;
@@ -15,7 +17,7 @@ public class CommunicationManager {
     private final Database db = Database.getInstance();
     private final AuthManager authManager = AuthManager.getInstance();
 
-    // --- Singleton-like access ---
+    
     private static CommunicationManager instance;
 
     protected CommunicationManager() {}
@@ -26,13 +28,8 @@ public class CommunicationManager {
         }
         return instance;
     }
-    // -----------------------------
-
-    // --- Core Methods ---
     
-    // Executes any Command (SendMessageCommand, NotificationCommand)
     public void send(Command command) {
-        // For CLI simplicity, we execute commands immediately
         command.execute();
     }
 
@@ -43,13 +40,11 @@ public class CommunicationManager {
             return;
         }
 
-        // 1. Create the message object
-        Message message = new Message(sender.getId(), receiverId, content);
-        
-        // 2. Execute the command to save the message
+        UserMessage message = new UserMessage(sender.getId(), receiverId, content);
         Command sendMessage = new SendMessageCommand(message);
         send(sendMessage);
     }
+    
 
     public List<Message> getMessagesForCurrentUser() {
         User user = authManager.getCurrentUser();
@@ -60,20 +55,10 @@ public class CommunicationManager {
         return db.findMessagesForUser(user.getId());
     }
     
-    // --- Helper Methods to send system notifications ---
-
-    public void sendSessionUpdateNotification(String userId, String sessionId, String content) {
-        String notification = String.format("Session %s Update: %s", sessionId.substring(0, 4), content);
-        Command cmd = new NotificationCommand(userId, notification);
-        send(cmd);
-    }
-
-    public void sendBookingNotification(String playerId, String trainerId, double cost) {
-        String playerNotification = String.format("Booking confirmed! You paid $%.2f to Trainer %s.", cost, authManager.getUserById(trainerId).getName());
-        String trainerNotification = String.format("New Booking received from Player %s! You earned $%.2f.", authManager.getUserById(playerId).getName(), cost);
-
-        // Notify both parties
-        send(new NotificationCommand(playerId, playerNotification));
-        send(new NotificationCommand(trainerId, trainerNotification));
+    
+    public void sendNotification(String receiverId, String content) {
+		Notification notification = new Notification(receiverId, content);
+		send(new NotificationCommand(notification));
+    	
     }
 }

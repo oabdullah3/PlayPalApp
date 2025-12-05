@@ -1,19 +1,16 @@
 package app.entities;
 
-import app.utils.UserState;
 import app.exceptions.InsufficientFundsException;
 
 import java.util.UUID; // Used for unique IDs
 
 public abstract class User {
     
-    private final String id;
+    private String id;
     private String name;
     private final String email;
     private final String password;
     private double balance;
-    
-    protected UserState state;
 
     public User(String name, String email, String password, double initialBalance) {
         this.id = UUID.randomUUID().toString();
@@ -25,7 +22,10 @@ public abstract class User {
     
     public abstract void showMenuOptions();
     
-
+    public void setId(String id) {
+		this.id = id;
+	}
+    
     public void pay(double amount) throws InsufficientFundsException {
         if (this.balance < amount) {
             throw new InsufficientFundsException("Insufficient funds: " + this.balance);
@@ -72,11 +72,5 @@ public abstract class User {
 
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    public void executeMenu() {
-        if (state != null) {
-            state.showMenu();
-        }
     }
 }

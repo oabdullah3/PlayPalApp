@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Session {
     
-    private final String sessionId;
+    private String sessionId;
     private final String creatorId;
     private final String sport;
     private final String location;
@@ -28,6 +28,14 @@ public class Session {
     
     public boolean isFull() {
         return participantIds.size() >= maxParticipants;
+    }
+    
+    public void setId(String id) {
+        this.sessionId = id;
+    }
+    
+    public void setParticipantIds(List<String> ids) {
+        this.participantIds = ids;
     }
 
 

@@ -6,6 +6,7 @@ import java.util.List;
 import app.entities.Player;
 import app.entities.Session;
 import app.entities.Trainer;
+import app.entities.User;
 import app.exceptions.BookingFailedException;
 import app.exceptions.InsufficientFundsException;
 import app.exceptions.SessionFullException;
@@ -15,14 +16,14 @@ import app.managers.BookingManager;
 import app.managers.SessionManager;
 import app.utils.InputValidator;
 
-public class PlayerUI {
+public class PlayerUI implements UserUI {
 	
 	private final SessionManager sessionManager = SessionManager.getInstance();
 	private final AuthManager authManager = AuthManager.getInstance();
     private final BookingManager bookingManager = BookingManager.getInstance();
     private final SharedUI sharedUI = new SharedUI();
 	
-	public void handlePlayerChoice(int choice, Player player) {
+	public void run(int choice) {
         switch (choice) {
             case 1:
                 handleCreateSession();

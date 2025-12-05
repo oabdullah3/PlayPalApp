@@ -3,23 +3,25 @@ package app.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Message {
+public abstract class Message {
 
-    private final String messageId;
-    private final String senderId;
+    private String messageId;
     private final String receiverId;
-    private final String content;
-    private final LocalDateTime timestamp;
+    protected final String content;
+    protected final LocalDateTime timestamp;
     private boolean isRead;
 
 
-    public Message(String senderId, String receiverId, String content) {
+    public Message(String receiverId, String content) {
         this.messageId = UUID.randomUUID().toString();
-        this.senderId = senderId;
         this.receiverId = receiverId;
         this.content = content;
         this.timestamp = LocalDateTime.now();
         this.isRead = false;
+    }
+    
+    public void setId(String id) {
+        this.messageId = id;
     }
 
 
@@ -27,9 +29,6 @@ public class Message {
         return messageId;
     }
 
-    public String getSenderId() {
-        return senderId;
-    }
 
     public String getReceiverId() {
         return receiverId;
@@ -51,10 +50,7 @@ public class Message {
     public void setRead(boolean read) {
         isRead = read;
     }
+    
+    public abstract String toString();
 
-    @Override
-    public String toString() {
-        return String.format("[%s] From %s: %s", 
-            timestamp.toLocalTime(), senderId.substring(0, 4), content);
-    }
 }

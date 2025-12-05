@@ -25,9 +25,6 @@ public class SessionManager {
         }
         return instance;
     }
-    // ----------------------------
-
-    // --- Core Methods ---
 
     public void createSession(String sport, String location, LocalDateTime time, int maxParticipants) {
         User creator = authManager.getCurrentUser();
@@ -68,11 +65,12 @@ public class SessionManager {
         }
 
         session.addParticipant(user.getId());
+        db.addParticipantDirectly(session.getSessionId(), user.getId());
         System.out.println("Successfully joined session: " + session.getSport());
 
-        // Trigger notification to session owner (simplified logic)
-        CommunicationManager.getInstance().sendSessionUpdateNotification(
-            session.getCreatorId(), session.getSessionId(), user.getName() + " has joined your session.");
+        String notificationContent = String.format("Session %s Update: %s has joined your session.", session.getSessionId().substring(0, 4), user.getName());
+        CommunicationManager.getInstance().sendNotification(
+            session.getCreatorId(), notificationContent);
     }
 
     public Session getSessionById(String sessionId) {
