@@ -8,5 +8,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Omer Abdullah/Desktop/Eclipse-Stuff/Project/PlayPal/lib/bson-4.11.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Omer Abdullah/Desktop/Eclipse-Stuff/Project/PlayPal/lib/mongodb-driver-core-4.11.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Omer Abdullah/Desktop/Eclipse-Stuff/Project/PlayPal/lib/mongodb-driver-sync-4.11.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
