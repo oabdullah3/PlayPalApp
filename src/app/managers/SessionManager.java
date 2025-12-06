@@ -14,7 +14,6 @@ public class SessionManager {
     private final Database db = Database.getInstance();
     private final AuthManager authManager = AuthManager.getInstance();
 
-    // --- Singleton-like access ---
     private static SessionManager instance;
 
     protected SessionManager() {}
@@ -55,13 +54,13 @@ public class SessionManager {
             throw new SessionNotFoundException("Session not found with ID: " + sessionId);
         }
 
-        if (session.isFull()) {
-            throw new SessionFullException("Session is full. Max participants reached.");
-        }
-        
         if (session.getParticipantIds().contains(user.getId())) {
             System.out.println("You are already participating in this session.");
             return;
+        }
+
+        if (session.isFull()) {
+            throw new SessionFullException("Session is full. Max participants reached.");
         }
 
         session.addParticipant(user.getId());
