@@ -1,4 +1,4 @@
-package tests.current.temporary;
+package tests.integration.all;
 
 import app.entities.Trainer;
 import app.managers.AuthManager;
