@@ -311,7 +311,7 @@ public class Database {
         List<Message> list = new ArrayList<>();
 
         for (Document doc : messagesCol.find(Filters.eq("receiverId", userId))) {
-            String type = doc.getString("senderId").equals("SYSTEM") ? "NOTIFICATION" : "USER_MESSAGE";
+            String type = "SYSTEM".equals(doc.getString("senderId")) ? "NOTIFICATION" : "USER_MESSAGE";
             Message m;
 
             if ("NOTIFICATION".equals(type)) {
