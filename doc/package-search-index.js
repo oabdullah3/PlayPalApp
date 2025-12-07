@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"app.entities"},{"l":"app.exceptions"},{"l":"app.main"},{"l":"app.managers"},{"l":"app.patterns.command"},{"l":"app.ui"},{"l":"app.utils"},{"l":"tests.integration.all"},{"l":"tests.system.all"},{"l":"tests.unit.all"}];updateSearchResults();

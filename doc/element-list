@@ -1,0 +1,10 @@
+app.entities
+app.exceptions
+app.main
+app.managers
+app.patterns.command
+app.ui
+app.utils
+tests.integration.all
+tests.system.all
+tests.unit.all
