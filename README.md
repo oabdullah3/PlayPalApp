@@ -78,7 +78,7 @@ PlayHub is currently packaged for Windows environments.
 
 1.  **Download:** Navigate to the **Releases** section and download the `PlayHub_v2.0.0.zip` folder.
 2.  **Unzip:** Extract the contents of the zip file to a location of your choice.
-3.  **Run:** Open the folder and double-click the `run.bat` file.
+3.  **Run:** Open the folder and double-click the `PlayPal.bat` file.
 4.  **Interact:** A command window will open. Use the **Number Keys** to select menu options and **Enter** to confirm.
 
 ---
@@ -87,7 +87,7 @@ PlayHub is currently packaged for Windows environments.
 
 **Error: `UnsupportedClassVersionError`**
 * **Cause:** Your installed Java version is older than Java 11.
-* **Fix:** Install JDK 11 or JDK 21 from [Adoptium.net](https://adoptium.net/).
+* **Fix:** Install JDK 11 or above from [Oracle]([https://adoptium.net/](https://www.oracle.com/apac/java/technologies/downloads/)).
 
 **Connection Issues**
 * **Requirement:** Ensure you are connected to the internet. Offline mode is not supported in v2.0.0 due to the cloud database architecture.
